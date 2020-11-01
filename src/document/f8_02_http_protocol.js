@@ -13,5 +13,3 @@
 
 // // Cách 3
 // app.get('/xin-chao', (req,res)=> res.send('Hello World!'))
-
-
