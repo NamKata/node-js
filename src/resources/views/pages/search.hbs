@@ -15,3 +15,17 @@
         <button type="submit" class="btn btn-primary">Tìm kiếm</button>
     </form>
 </div>
+{{!-- {{Course}} --}}
+<div class="row">
+{{#each Course}}
+<div class="card" style="width: 18rem; margin: 5px;">
+  <img src="{{this.image}}" class="card-img-top" alt="{{this.image}}">
+  <div class="card-body">
+    <h5 class="card-title">
+        <a href="/details/{{this.slug}}">{{this.name}}</a></h5>
+    <p class="card-text">{{this.description}}.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+{{/each}}
+</div>

@@ -10,6 +10,14 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 
 /**
+ * Connect DATABASE
+ */
+
+const db = require('./config/db/connect')
+db.connect()
+
+
+/**
  * App Variables
  */
 
@@ -20,7 +28,18 @@ const port = process.env.PORT || 3000;
 /**
  *  App Configuration
  */
-app.use(express.static(path.join(__dirname, 'public')));
+const options = {
+    dotfiles: 'ignore',
+    etag: false,
+    extensions: ['htm', 'html'],
+    index: false,
+    maxAge: '1d',
+    redirect: false,
+    setHeaders: function (res, path, stat) {
+      res.set('x-timestamp', Date.now())
+    }
+  }
+app.use(express.static(path.join(__dirname, 'public'), options));
 app.use(morgan('combined'));
 app.use(express.urlencoded());
 app.use(express.json());
@@ -44,7 +63,7 @@ app.set('view engine', 'pug');
  * Routes Definitions
  */
 
-const route = require('./public/routes');
+const route = require('./routes');
 route(app);
 
 /**
