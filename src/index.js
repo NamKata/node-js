@@ -26,9 +26,10 @@ const port = process.env.PORT || 3000
 /**
  *  App Configuration
  */
-
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(morgan('combined'))
+app.use(express.urlencoded())
+app.use(express.json())
 app.engine('.hbs', exphbs({
   extname:'.hbs'
 }))
@@ -48,10 +49,9 @@ app.set("view engine", "pug");
  * Routes Definitions
  */
 
+const route = require('./public/routes')
+route(app)
 
-app.get('/', (req, res)=>{
-  res.render('pages/home.hbs')
-})
 
 
 /**
