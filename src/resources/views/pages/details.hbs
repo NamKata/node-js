@@ -5,6 +5,13 @@
   <div class="card-body">
     <p class="card-text">{{course.description}}.</p>
   </div>
+  <a href="/details/detail/{{course.slug}}" class="btn btn-primary"> Chỉnh sửa</a>
+  {{!-- <a href="/details/detail/{{course.slug}}/delete" > Xóa</a> --}}
+  <form action="/details/detail/{{course.slug}}/delete" method="POST">
+  <div class="form-group">
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </div>
+</form>
 </div>
 {{!-- {{/with}} --}}
 </div>

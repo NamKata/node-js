@@ -25,6 +25,33 @@ class SearchControllers {
         .catch(error=>{})
         // res.send("SUCESSFully")
     }
+    // [GET] detail/slug
+    detail(req, res, next) {
+        Course.findOne({slug: req.params.slug})
+        .then(data=>{
+            res.render('pages/update.hbs', {course:mongooseToObject(data)})
+        })
+        .catch(next)
+    }
+    // [POST] details/slug/update
+    update(req,res, next){
+        var name = req.body.name
+        var description = req.body.description
+        Course.update({name:name, description:description})
+        .then(()=> {
+            console.log("SUCCESS!!!")
+            return res.redirect('/search/search')
+            }
+        )
+        .catch(next, console.log("ERROR"))
+    }
+    delete(req,res, next){
+        Course.findOneAndDelete({slug: req.params.slug})
+        .then(()=>{
+            console.log("DELETE SUCCESS!!!")
+            res.redirect('/search/search')
+        }).catch(next)
+    }
 }
 
 module.exports = new SearchControllers();
